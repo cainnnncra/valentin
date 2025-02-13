@@ -15,7 +15,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden; /* Initially hide overflow */
+      overflow: hidden; /* hidden on larger screens */
     }
 
     .container {
@@ -92,19 +92,22 @@
       100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
 
+    /* Mobile adjustments */
     @media (max-width: 600px) {
+      body {
+        display: block;
+        height: auto;
+        overflow: auto;
+      }
+      
       .container {
         width: 90%;
         padding: 15px;
+        margin: 20px auto;  /* added margin so container isn’t flush to the top */
       }
       
       .buttons {
         flex-direction: column;
-      }
-      
-      /* Allow scrolling on small screens */
-      body {
-        overflow: auto;
       }
     }
   </style>
