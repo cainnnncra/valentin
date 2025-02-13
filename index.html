@@ -17,7 +17,7 @@
       align-items: center;
       overflow: hidden; /* hidden on larger screens */
     }
-
+    
     .container {
       background: white;
       padding: 20px;
@@ -27,11 +27,11 @@
       width: 400px;
       position: relative;
     }
-
+    
     h1, h2 {
       color: #d6336c;
     }
-
+    
     .valentine-img {
       width: 200px;
       height: 200px;
@@ -39,14 +39,14 @@
       margin: 15px 0;
       border: 4px solid #ff4f7b;
     }
-
+    
     .buttons {
       display: flex;
       justify-content: center;
       gap: 20px;
       margin-top: 10px;
     }
-
+    
     button {
       padding: 10px 20px;
       font-size: 18px;
@@ -55,29 +55,29 @@
       transition: all 0.3s ease-in-out;
       border-radius: 10px;
     }
-
+    
     .yes-btn {
       background: #ff4f7b;
       color: white;
     }
-
+    
     .yes-btn:hover {
       background: #d6336c;
     }
-
+    
     .no-btn {
       background: #bbb;
       color: white;
       position: relative;
     }
-
+    
     .hidden {
       display: none;
       color: red;
       font-size: 18px;
       margin-top: 10px;
     }
-
+    
     .flower {
       position: absolute;
       width: 200px;
@@ -86,12 +86,12 @@
       background-size: contain;
       animation: fall 2s linear forwards;
     }
-
+    
     @keyframes fall {
       0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
       100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
-
+    
     /* Mobile adjustments */
     @media (max-width: 600px) {
       body {
@@ -103,7 +103,7 @@
       .container {
         width: 90%;
         padding: 15px;
-        margin: 20px auto;  /* added margin so container isn’t flush to the top */
+        margin: 20px auto;
       }
       
       .buttons {
@@ -125,26 +125,43 @@
     <p id="no-text" class="hidden">NOT ALLOWED! 😤</p>
   </div>
   
+  <!-- Spacer to allow scrolling if needed -->
+  <div id="spacer"></div>
+  
   <script>
     function moveButton() {
       let noBtn = document.querySelector('.no-btn');
       let noText = document.getElementById('no-text');
       let container = document.querySelector('.container');
       
-      // Calculate the max positions within the container
+      // Calculate maximum positions within the container
       let maxX = container.offsetWidth - noBtn.offsetWidth - 20;
       let maxY = container.offsetHeight - noBtn.offsetHeight - 20;
       
       let x = Math.random() * maxX;
       let y = Math.random() * maxY;
       
+      // Position the button absolutely within the container
       noBtn.style.position = 'absolute';
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
       
       noText.classList.remove('hidden');
+      
+      // For mobile: if the button's bottom is below the viewport,
+      // update the spacer's height to allow scrolling.
+      if (window.innerWidth <= 600) {
+        let btnRect = noBtn.getBoundingClientRect();
+        let extraSpace = btnRect.bottom - window.innerHeight;
+        let spacer = document.getElementById('spacer');
+        if (extraSpace > 0) {
+          spacer.style.height = extraSpace + 20 + 'px';
+        } else {
+          spacer.style.height = '0px';
+        }
+      }
     }
-
+    
     function showFlowers() {
       for (let i = 0; i < 15; i++) {
         let flower = document.createElement('div');
