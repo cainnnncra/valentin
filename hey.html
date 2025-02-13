@@ -73,25 +73,49 @@
             100% { opacity: 0; transform: translateY(-50px); }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            .container {
+                width: 80%;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .love-text {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
             .container {
                 width: 90%;
-                padding: 15px;
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+
+            .love-text {
+                font-size: 18px;
+            }
+
+            video {
+                height: auto;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-       
-        
         <div class="video-container">
             <video controls>
-                <source src="your-video.mp4" type="video/mp4">
+                <source src="Snapchat-1450630124.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
-
         <h1 class="love-text" id="loveText">I LOVE YOUU ❤️</h1>
     </div>
 
